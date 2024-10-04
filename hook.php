@@ -22,6 +22,18 @@ function plugin_antiviruschecker_install() {
         $DB->queryOrDie($query,"Error creating table glpi_plugin_antiviruschecker: " . $DB->error());
     }
 
+    // Create a table to store the API token
+    if (!$DB->tableExists('glpi_plugin_antiviruschecker_config')) {
+        $query = "
+        CREATE TABLE `glpi_plugin_antiviruschecker_config` (
+            `id` INT NOT NULL,
+            `token` VARCHAR(255) NOT NULL,
+            PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+      ";
+        $DB->queryOrDie($query, "Error creating table glpi_plugin_antiviruschecker_config: " . $DB->error());
+    }
+
     $migration->executeMigration();
 
     return true;
@@ -37,3 +49,4 @@ function plugin_antiviruschecker_uninstall() {
     return true;
 }
 
+Plugin::registerClass('PluginaAntiviruscheckerAntiviruschecker',['addtabon' => 'Config'] );

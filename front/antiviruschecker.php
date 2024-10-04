@@ -1,12 +1,15 @@
 <?php
 
-include_once("../inc/antiviruschecker.class.php");
+include_once "../inc/antiviruschecker.class.php";
 
+// if(!defined('GLPI_ROOT')){
+//     die('No access here');
+// }
 //instantiate the db connection
 global $DB;
 
 //Instantiate the antivirus class
-$antivirusChecker = new PluginaAntiviruscheckerAntiviruschecker($DB);
+$antivirusChecker = new PluginaAntiviruscheckerAntiviruschecker();#$DB);
 $device = [];
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['fetch_data'])) {
     $devices = $antivirusChecker->fetch_display_data();
@@ -33,15 +36,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['fetch_data'])) {
         <?php
         if(!empty($devices)):
             $currentGroup = null;
+            foreach($devices as $device):
+                if ($currentGroup !== $device['groupName']):
+                    $currentGroup= $device['groupName'];
+                    if ($currentGroup !== null):
         ?>
-            <div class="display-table">
-                <table style = "background-color:#bee4ff; margin:40px; width: 70vw;">
-                    <tr style = "background-color: #758ba0;">
-                        <th>Computer Name</th>
-                        <th> Status</th>
-                        <th>Last Active Date</th>
-                    </tr>
-                    <?php foreach($devices as $device): ?>
+                        </table>
+                    </div>
+                    <?php endif; ?>
+                <h2 style = "background-color: #c3d2e0;"><?php echo htmlspecialchars($currentGroup); ?></h2>
+                <div class="display-table" style="display:flex; justify-content: center;">
+                    <table style = "background-color:#9ed6ff; width: 70vw;">
+                        <tr style = "background-color: #758ba0;">
+                            <th>Computer Name</th>
+                            <th> Status</th>
+                            <th>Last Active Date</th>
+                        </tr>
+        <?php
+                endif;
+        ?>            
                         <tr>
                             <td><?php echo htmlspecialchars($device['computerName']);?></td>
                             <?php $statusColor = ($device['antivirusStatus'] === 'Inactive') ? 'red' : 'green'; ?>
@@ -52,6 +65,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['fetch_data'])) {
                 </table>
             </div>
         <?php
+         Html::closeForm();
         endif;
         ?> 
     </div>       

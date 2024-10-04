@@ -1,22 +1,42 @@
 <?php
 
+//include "../../../inc/includes.php";
+
+// if(!defined('GLPI_ROOT')){
+//     die('No access found');
+// }
+
 class PluginaAntiviruscheckerAntiviruschecker{
+
 
     private $apiUrl = 'https://apne1-1001.sentinelone.net/web/api/v2.1/agents?limit=100';
 
     //Change the api token generated here. private $token = 'Your api token here';
 
     private $token = 'eyJraWQiOiJhcC1zb3V0aGVhc3QtMS1wcm9kLTAiLCJhbGciOiJFUzI1NiJ9.eyJzdWIiOiJzZXJ2aWNldXNlci05ZGIzZjEyZS01YTcxLTQ0MmUtYWEyNC0wMjI5YzZjNzUyNGFAbWdtdC0yMC5zZW50aW5lbG9uZS5uZXQiLCJpc3MiOiJhdXRobi1hcC1zb3V0aGVhc3QtMS1wcm9kIiwiZGVwbG95bWVudF9pZCI6IjIwIiwidHlwZSI6InVzZXIiLCJleHAiOjE3MzUxMTgwNjcsImlhdCI6MTcyNzI1NTg3NSwianRpIjoiYTcwY2EyMzYtZDU4OC00YWU5LWI3ZmMtMTFlMzFmZDE2NmRmIn0.7hXLdHyTgh2wlCvguLEqBTX31Poeh4w2kjUx-cos-YXpafp0vHPaTZvpIM6I6vp-vhLi9GIWMcdeJ5HFoDSlrA';  // Ensure this is stored securely
-    private $db;
 
-    public function __construct($db){
-        $this->db = $db;
-    }
+
+    // private $token;
+    // public function __construct(){
+    //     global $DB;
+    
+    //     // Retrieve the token from the database
+    //     $query = "SELECT token FROM glpi_plugin_antiviruschecker_config WHERE id = 1 LIMIT 1";
+    //     $result = $DB->query($query);
+    
+    //     if ($result && $DB->numrows($result) > 0) {
+    //         $row = $DB->fetch_assoc($result);
+    //         $this->token = $row['token'];
+    //     } else {
+    //         // Handle error if no token is found or database issue
+    //         error_log("Error: API token not found in the database.");
+    //     }
+    // }
 
     public function fetch_display_data(){
         $hasNextPage = true;
         $nextCursor = '';
-        $onemonthago = strtotime('-1 day');
+        $onemonthago = strtotime('-2 week');
 
         while ($hasNextPage) {
             $ch = curl_init($this->apiUrl . $nextCursor);
