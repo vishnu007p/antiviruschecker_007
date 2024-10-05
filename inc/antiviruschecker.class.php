@@ -13,7 +13,7 @@ class PluginaAntiviruscheckerAntiviruschecker{
 
     //Change the api token generated here. private $token = 'Your api token here';
 
-    private $token = 'eyJraWQiOiJhcC1zb3V0aGVhc3QtMS1wcm9kLTAiLCJhbGciOiJFUzI1NiJ9.eyJzdWIiOiJzZXJ2aWNldXNlci05ZGIzZjEyZS01YTcxLTQ0MmUtYWEyNC0wMjI5YzZjNzUyNGFAbWdtdC0yMC5zZW50aW5lbG9uZS5uZXQiLCJpc3MiOiJhdXRobi1hcC1zb3V0aGVhc3QtMS1wcm9kIiwiZGVwbG95bWVudF9pZCI6IjIwIiwidHlwZSI6InVzZXIiLCJleHAiOjE3MzUxMTgwNjcsImlhdCI6MTcyNzI1NTg3NSwianRpIjoiYTcwY2EyMzYtZDU4OC00YWU5LWI3ZmMtMTFlMzFmZDE2NmRmIn0.7hXLdHyTgh2wlCvguLEqBTX31Poeh4w2kjUx-cos-YXpafp0vHPaTZvpIM6I6vp-vhLi9GIWMcdeJ5HFoDSlrA';  // Ensure this is stored securely
+    private $token = '#';  // Ensure this is stored securely
 
 
     // private $token;
